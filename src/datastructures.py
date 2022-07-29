@@ -17,7 +17,7 @@ class FamilyStructure:
             {
                 "id": self._generateId(),
                 "first_name":"John",
-                "last_name":self.last_name,
+                "last_name":self.last_name, 
                 "age": 33,
                 "lucky_numbers":[7, 13, 22] 
             },
@@ -42,30 +42,19 @@ class FamilyStructure:
         return randint(0, 99999999)
 
     def add_member(self, member):
-        NewMembers = {}
-        if "id" in member:
-            NewMembers["id"]=int(member["id"])
-        else:
-            NewMembers["id"]= self._generateId()
-            NewMembers["first_name"]=str(member["first_name"])
-            NewMembers["last_name"]=self.last_name
-            NewMembers["age"]=int(member["age"])
-            NewMembers["lucky_numbers"]=member["lucky_members"]
-            self._members.append(NewMembers)
-        pass
+        self._members.append(member)
+        return True
 
     def delete_member(self, id):
-        for position in range (len(self._members)):
-            if self._members[position] ["id"]== int(id):
-                self._members.pop(position)
-                return{"done": True}
-        return None
+        new_members = list(filter(lambda i:i ["id"] != id, self._members))
+        self._members=new_members
+        return True
 
     def get_member(self, id):
-        for position in range(len(self._members)):
-            if self._members[position]["id"]==int(id):
-                return (self._members[position])
-        return None
+        for i in self._members:
+            if i ["id"] == id:
+                return i
+        return False
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
